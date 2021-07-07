@@ -137,6 +137,12 @@ public class HelloServlet extends HttpServlet {
 
         if (altura == null || peso == null)
             msg2 = "Não conseguimos calcular seu IMC.";
+        else {
+            float alturaf = Float.parseFloat(altura);
+            float pesof = Float.parseFloat(peso);
+            float imc = pesof / (alturaf * alturaf);
+            msg2 = "Seu IMC é " + imc;
+        }
 
         response.setContentType("text/html;charset=UTF-8");
         try (PrintWriter out = response.getWriter()) {
@@ -239,14 +245,15 @@ public class HelloServlet extends HttpServlet {
 
         String altura = request.getParameter("altura");
         String peso = request.getParameter("peso");
-        float alturaf = Float.parseFloat(altura);
-        float pesof = Float.parseFloat(peso);
-        float imc = pesof / (alturaf*alturaf);
 
         if (altura == null || peso == null)
             msg2 = "Não conseguimos calcular seu IMC.";
-        else
+        else {
+            float alturaf = Float.parseFloat(altura);
+            float pesof = Float.parseFloat(peso);
+            float imc = pesof / (alturaf * alturaf);
             msg2 = "Seu IMC é " + imc;
+        }
 
         response.setContentType("text/html;charset=UTF-8");
         try (PrintWriter out = response.getWriter()) {
