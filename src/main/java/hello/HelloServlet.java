@@ -63,6 +63,7 @@ public class HelloServlet extends HttpServlet {
             throws ServletException, IOException {
 
         String msg = "";
+        String msg2 = "";
 
         String lang = request.getParameter("lang");
         if (lang == null)
@@ -131,6 +132,12 @@ public class HelloServlet extends HttpServlet {
 
         msg = msg + nome + "!";
 
+        String altura = request.getParameter("altura");
+        String peso = request.getParameter("peso");
+
+        if (altura == null || peso == null)
+            msg2 = "Não conseguimos calcular seu IMC.";
+
         response.setContentType("text/html;charset=UTF-8");
         try (PrintWriter out = response.getWriter()) {
             /* TODO output your page here. You may use following sample code. */
@@ -142,6 +149,7 @@ public class HelloServlet extends HttpServlet {
             out.println("<body>");
             out.println("<h1>Servlet HelloServlet</h1>");
             out.println("<p>" + msg + "</p>");
+            out.println("<p>" + msg2 + "</p>");
             out.println("</body>");
             out.println("</html>");
         }
