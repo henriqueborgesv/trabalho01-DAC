@@ -12,6 +12,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import java.time.LocalDateTime;
 
 /**
  *
@@ -19,15 +20,16 @@ import javax.servlet.http.HttpServletResponse;
  */
 @WebServlet("/alomundo")
 public class HelloServlet extends HttpServlet {
+    LocalDateTime date = LocalDateTime.now();
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
      * methods.
      *
-     * @param request servlet request
+     * @param request  servlet request
      * @param response servlet response
      * @throws ServletException if a servlet-specific error occurs
-     * @throws IOException if an I/O error occurs
+     * @throws IOException      if an I/O error occurs
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
@@ -37,7 +39,7 @@ public class HelloServlet extends HttpServlet {
             out.println("<!DOCTYPE html>");
             out.println("<html>");
             out.println("<head>");
-            out.println("<title>Servlet HelloServlet</title>");            
+            out.println("<title>Servlet HelloServlet</title>");
             out.println("</head>");
             out.println("<body>");
             out.println("<h1>Servlet HelloServlet at " + request.getContextPath() + "</h1>");
@@ -46,42 +48,88 @@ public class HelloServlet extends HttpServlet {
         }
     }
 
-    // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
+    // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the
+    // + sign on the left to edit the code.">
     /**
      * Handles the HTTP <code>GET</code> method.
      *
-     * @param request servlet request
+     * @param request  servlet request
      * @param response servlet response
      * @throws ServletException if a servlet-specific error occurs
-     * @throws IOException if an I/O error occurs
+     * @throws IOException      if an I/O error occurs
      */
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        
+
         String msg = "";
-        
+
         String lang = request.getParameter("lang");
-        if(lang==null)
+        if (lang == null)
             lang = "pt";
-        switch(lang){
+        switch (lang) {
             case "pt":
-                msg = "Alô, ";
+                if (this.date.getHour() > 6 && this.date.getHour() < 12) {
+                    msg = "Bom dia, ";
+                } else if (this.date.getHour() > 12 && this.date.getHour() < 18) {
+                    msg = "Boa tarde, ";
+                } else {
+                    msg = "Boa noite, ";
+                }
                 break;
             case "en":
-                msg = "Hello, ";
+                if (this.date.getHour() > 6 && this.date.getHour() < 12) {
+                    msg = "Good morning, ";
+                } else if (this.date.getHour() > 12 && this.date.getHour() < 18) {
+                    msg = "Good afternoon, ";
+                } else {
+                    msg = "Good evening, ";
+                }
                 break;
             case "fr":
-                msg = "Bonjour, ";
+                if (this.date.getHour() > 6 && this.date.getHour() < 12) {
+                    msg = "Bonjour, ";
+                } else if (this.date.getHour() > 12 && this.date.getHour() < 18) {
+                    msg = "Bonsoir, ";
+                } else {
+                    msg = "Bonne nuit, ";
+                }
+                break;
+            case "de":
+                if (this.date.getHour() > 6 && this.date.getHour() < 12) {
+                    msg = "Guten Morgen, ";
+                } else if (this.date.getHour() > 12 && this.date.getHour() < 18) {
+                    msg = "Guten Tag, ";
+                } else {
+                    msg = "Gute Nacht, ";
+                }
+                break;
+            case "es":
+                if (this.date.getHour() > 6 && this.date.getHour() < 12) {
+                    msg = "Buen dia, ";
+                } else if (this.date.getHour() > 12 && this.date.getHour() < 18) {
+                    msg = "Buenas tardes, ";
+                } else {
+                    msg = "Buenas noches, ";
+                }
+                break;
+            case "ho":
+                if (this.date.getHour() > 6 && this.date.getHour() < 12) {
+                    msg = "Goedemorgen, ";
+                } else if (this.date.getHour() > 12 && this.date.getHour() < 18) {
+                    msg = "Goedenmiddag, ";
+                } else {
+                    msg = "Welterusten, ";
+                }
                 break;
         }
-        
+
         String nome = request.getParameter("nome");
 
-        if(nome==null)
+        if (nome == null)
             nome = "Fulano";
-        
-        msg = msg+nome+"!";
+
+        msg = msg + nome + "!";
 
         response.setContentType("text/html;charset=UTF-8");
         try (PrintWriter out = response.getWriter()) {
@@ -89,7 +137,7 @@ public class HelloServlet extends HttpServlet {
             out.println("<!DOCTYPE html>");
             out.println("<html>");
             out.println("<head>");
-            out.println("<title>Servlet HelloServlet</title>");            
+            out.println("<title>Servlet HelloServlet</title>");
             out.println("</head>");
             out.println("<body>");
             out.println("<h1>Servlet HelloServlet</h1>");
@@ -102,40 +150,82 @@ public class HelloServlet extends HttpServlet {
     /**
      * Handles the HTTP <code>POST</code> method.
      *
-     * @param request servlet request
+     * @param request  servlet request
      * @param response servlet response
      * @throws ServletException if a servlet-specific error occurs
-     * @throws IOException if an I/O error occurs
+     * @throws IOException      if an I/O error occurs
      */
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         String msg = "";
-        
+
         String lang = request.getParameter("lang");
-        if(lang==null)
+        if (lang == null)
             lang = "pt";
-        switch(lang){
+        switch (lang) {
             case "pt":
-                msg = "Alô, ";
+                if (this.date.getHour() > 6 && this.date.getHour() < 12) {
+                    msg = "Bom dia, ";
+                } else if (this.date.getHour() > 12 && this.date.getHour() < 18) {
+                    msg = "Boa tarde, ";
+                } else {
+                    msg = "Boa noite, ";
+                }
                 break;
             case "en":
-                msg = "Hello, ";
+                if (this.date.getHour() > 6 && this.date.getHour() < 12) {
+                    msg = "Good morning, ";
+                } else if (this.date.getHour() > 12 && this.date.getHour() < 18) {
+                    msg = "Good afternoon, ";
+                } else {
+                    msg = "Good evening, ";
+                }
                 break;
             case "fr":
-                msg = "Bonjour, ";
+                if (this.date.getHour() > 6 && this.date.getHour() < 12) {
+                    msg = "Bonjour, ";
+                } else if (this.date.getHour() > 12 && this.date.getHour() < 18) {
+                    msg = "Bonsoir, ";
+                } else {
+                    msg = "Bonne nuit, ";
+                }
                 break;
             case "de":
-                msg = "Hallo, ";
+                if (this.date.getHour() > 6 && this.date.getHour() < 12) {
+                    msg = "Guten Morgen, ";
+                } else if (this.date.getHour() > 12 && this.date.getHour() < 18) {
+                    msg = "Guten Tag, ";
+                } else {
+                    msg = "Gute Nacht, ";
+                }
+                break;
+            case "es":
+                if (this.date.getHour() > 6 && this.date.getHour() < 12) {
+                    msg = "Buen dia, ";
+                } else if (this.date.getHour() > 12 && this.date.getHour() < 18) {
+                    msg = "Buenas tardes, ";
+                } else {
+                    msg = "Buenas noches, ";
+                }
+                break;
+            case "ho":
+                if (this.date.getHour() > 6 && this.date.getHour() < 12) {
+                    msg = "Goedemorgen, ";
+                } else if (this.date.getHour() > 12 && this.date.getHour() < 18) {
+                    msg = "Goedenmiddag, ";
+                } else {
+                    msg = "Welterusten, ";
+                }
                 break;
         }
-        
+
         String nome = request.getParameter("nome");
 
-        if(nome==null)
+        if (nome == null)
             nome = "Fulano";
-        
-        msg = msg+nome+"!";
+
+        msg = msg + nome + "!";
 
         response.setContentType("text/html;charset=UTF-8");
         try (PrintWriter out = response.getWriter()) {
@@ -143,7 +233,7 @@ public class HelloServlet extends HttpServlet {
             out.println("<!DOCTYPE html>");
             out.println("<html>");
             out.println("<head>");
-            out.println("<title>Servlet HelloServlet</title>");            
+            out.println("<title>Servlet HelloServlet</title>");
             out.println("</head>");
             out.println("<body>");
             out.println("<h1>Servlet HelloServlet</h1>");
