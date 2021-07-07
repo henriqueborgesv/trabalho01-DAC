@@ -144,6 +144,7 @@ public class HelloServlet extends HttpServlet {
             out.println("<!DOCTYPE html>");
             out.println("<html>");
             out.println("<head>");
+            out.println("<link rel=\"stylesheet\" type=\"text/css\" href=\"style.css\" />");
             out.println("<title>Servlet HelloServlet</title>");
             out.println("</head>");
             out.println("<body>");
@@ -167,6 +168,7 @@ public class HelloServlet extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         String msg = "";
+        String msg2 = "";
 
         String lang = request.getParameter("lang");
         if (lang == null)
@@ -235,17 +237,30 @@ public class HelloServlet extends HttpServlet {
 
         msg = msg + nome + "!";
 
+        String altura = request.getParameter("altura");
+        String peso = request.getParameter("peso");
+        float alturaf = Float.parseFloat(altura);
+        float pesof = Float.parseFloat(peso);
+        float imc = pesof / (alturaf*alturaf);
+
+        if (altura == null || peso == null)
+            msg2 = "Não conseguimos calcular seu IMC.";
+        else
+            msg2 = "Seu IMC é " + imc;
+
         response.setContentType("text/html;charset=UTF-8");
         try (PrintWriter out = response.getWriter()) {
             /* TODO output your page here. You may use following sample code. */
             out.println("<!DOCTYPE html>");
             out.println("<html>");
             out.println("<head>");
+            out.println("<link rel=\"stylesheet\" type=\"text/css\" href=\"style.css\" />");
             out.println("<title>Servlet HelloServlet</title>");
             out.println("</head>");
             out.println("<body>");
             out.println("<h1>Servlet HelloServlet</h1>");
             out.println("<p>" + msg + "</p>");
+            out.println("<p>" + msg2 + "</p>");
             out.println("</body>");
             out.println("</html>");
         }
