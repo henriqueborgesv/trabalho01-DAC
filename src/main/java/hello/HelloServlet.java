@@ -245,10 +245,8 @@ public class HelloServlet extends HttpServlet {
 
         String altura = request.getParameter("altura");
         String peso = request.getParameter("peso");
-        System.out.println(altura);
-        System.out.println(altura);
 
-        if (altura == null || peso == null)
+        if (altura == null || peso == null || altura == "" || peso == "")
             msg2 = msg2 + "Não conseguimos calcular seu IMC.";
         else {
             float alturaf = Float.parseFloat(altura);
